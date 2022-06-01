@@ -10,17 +10,24 @@ public class MappingProfiles : Profile
     {
         CreateMap<Activity, Activity>();
         CreateMap<Activity, ActivityDTO>()
-            .ForMember(h => h.HostUsername, 
-                opt 
+            .ForMember(h => h.HostUsername,
+                opt
                     => opt.MapFrom(a => a.Atendees.FirstOrDefault(
                         x => x.IsHost)!.AppUser.UserName));
-        CreateMap<ActivityAtendee, Profiles.Profile>()
+        CreateMap<ActivityAtendee, AtendeeDTO>()
             .ForMember(d => d.DisplayName,
                 opt
                     => opt.MapFrom(a => a.AppUser.DisplayName))
             .ForMember(d => d.Username,
                 opt
-                    => opt.MapFrom(a => a.AppUser.UserName));
-
+                    => opt.MapFrom(a => a.AppUser.UserName))
+            .ForMember(i => i.Image, 
+                opt 
+                    => opt.MapFrom(p => p.AppUser.Photos.FirstOrDefault(x => x.IsMain)!.Url));
+        CreateMap<AppUser, Profiles.Profile>()
+            .ForMember(i => i.Image, 
+                opt 
+                    => opt.MapFrom(p => p.Photos.FirstOrDefault(x => x.IsMain)!.Url));
+        
     }
 }
