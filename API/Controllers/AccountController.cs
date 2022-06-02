@@ -86,7 +86,7 @@ public class AccountController : ControllerBase
         return new UserDTO
         {
             DisplayName = user.DisplayName,
-            Username = user.DisplayName,
+            Username = user.UserName,
             Image = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
             Token = _tokenService.CreateToken(user)
         };
