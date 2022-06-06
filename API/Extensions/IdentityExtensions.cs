@@ -30,7 +30,9 @@ public static class IdentityExtensions
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = key,
                 ValidateIssuer = false,
-                ValidateAudience = false
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero   // remove default 5 min time window
             };
 
             opt.Events = new JwtBearerEvents
