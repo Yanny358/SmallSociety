@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
 using Application.Core;
@@ -29,6 +30,7 @@ public class ExceptionMiddleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+            Debug.Assert(e.StackTrace != null, "e.StackTrace != null");
             var response = _env.IsDevelopment()
                 ? new AppException(context.Response.StatusCode, e.Message, e.StackTrace)
                 : new AppException(context.Response.StatusCode, "Server Error");

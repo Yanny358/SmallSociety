@@ -9,7 +9,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        string currentUsername = null;
+        string? currentUsername = null;
         
         CreateMap<Activity, Activity>();
         

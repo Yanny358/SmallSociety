@@ -25,8 +25,18 @@ public class AccountController : ControllerBase
         _tokenService = tokenService;
     }
 
+    /// <summary>
+    /// Login into the rest backend, generates jwt to be included in
+    /// Authorize: Bearer 'your-jwt-token'
+    /// </summary>
+    /// <param name="loginDto">Supply email and password</param>
+    /// <returns>displayname,token, username, image</returns>
     [AllowAnonymous]
     [HttpPost("login")]
+    [Consumes("application/json")]
+    [Produces( "application/json" )]
+    [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
     {
         var user = await _userManager.Users.Include(p => p.Photos)
@@ -44,8 +54,17 @@ public class AccountController : ControllerBase
         return Unauthorized();
     }
 
+    /// <summary>
+    /// Register 
+    /// </summary>
+    /// <param name="registerDto"></param>
+    /// <returns></returns>
     [AllowAnonymous]
     [HttpPost("register")]
+    [Produces( "application/json" )]
+    [Consumes("application/json")]
+    [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDto)
     {
         if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
@@ -77,15 +96,22 @@ public class AccountController : ControllerBase
 
     [Authorize]
     [HttpGet]
+    [Produces( "application/json" )]
+    [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<UserDTO>> GetCurrentUser()
     {
         var user = await _userManager.Users.Include(p => p.Photos)
             .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-        return CreateUser(user);
+        return CreateUser(user!);
     }
 
     [Authorize]
     [HttpPost("refreshToken")]
+    [Produces( "application/json" )]
+    [Consumes("application/json")]
+    [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<UserDTO>> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
@@ -108,7 +134,7 @@ public class AccountController : ControllerBase
         {
             DisplayName = user.DisplayName,
             Username = user.UserName,
-            Image = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
+            Image = user.Photos?.FirstOrDefault(p => p.IsMain)?.Url,
             Token = _tokenService.CreateToken(user)
         };
     }

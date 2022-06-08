@@ -24,7 +24,7 @@ public class ChatHub : Hub
     public override async Task OnConnectedAsync()
     {
         var httpContext = Context.GetHttpContext();
-        var activityId = httpContext.Request.Query["activityId"];
+        var activityId = httpContext!.Request.Query["activityId"];
         await Groups.AddToGroupAsync(Context.ConnectionId, activityId);
         var result = await _mediator.Send(new CommentsList.Query { ActivityId = Guid.Parse(activityId) });
         await Clients.Caller.SendAsync("LoadComments", result.Value);

@@ -1,4 +1,3 @@
-using Application.Profiles;
 
 namespace Application.Activities;
 
