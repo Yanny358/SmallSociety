@@ -12,7 +12,7 @@ public class ProfileDetails
 {
     public class Query : IRequest<ResponseResult<Profile>>
     {
-        public string Username { get; set; }
+        public string Username { get; set; }  = default!;
     }
     
     public class Handler : IRequestHandler<Query, ResponseResult<Profile>>
@@ -36,7 +36,7 @@ public class ProfileDetails
                 .SingleOrDefaultAsync(x => x.Username == request.Username);
             
             
-            return ResponseResult<Profile>.Success(user);
+            return ResponseResult<Profile>.Success(user!);
         }
     }
 }

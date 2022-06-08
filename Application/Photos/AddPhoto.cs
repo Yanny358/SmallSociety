@@ -12,7 +12,7 @@ public class AddPhoto
 {
     public class Command : IRequest<ResponseResult<Photo>>
     {
-        public IFormFile File { get; set; }
+        public IFormFile File { get; set; }  = default!;
     }
     
     public class Handler : IRequestHandler<Command, ResponseResult<Photo>>
@@ -32,7 +32,7 @@ public class AddPhoto
         {
             var user = await _context.Users.Include(p => p.Photos)
                 .FirstOrDefaultAsync(x => x.UserName == _userNameAccessor.GetUsername());
-            if (user == null) return null;
+            if (user == null) return null!;
 
             var photoUploadResult = await _photoAccessor.AddPhoto(request.File);
             var photo = new Photo
@@ -41,9 +41,9 @@ public class AddPhoto
                 Id = photoUploadResult.PublicId
             };
 
-            if (!user.Photos.Any(x => x.IsMain)) photo.IsMain = true;
+            if (!user.Photos!.Any(x => x.IsMain)) photo.IsMain = true;
             
-            user.Photos.Add(photo);
+            user.Photos!.Add(photo);
 
             var result = await _context.SaveChangesAsync() > 0;
 

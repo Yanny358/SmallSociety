@@ -13,7 +13,7 @@ public class EditProfile
 {
     public class Command : IRequest<ResponseResult<Unit>>
     {
-        public string DisplayName { get; set; }
+        public string DisplayName { get; set; } = default!;
     }
     
     public class CommandValidator : AbstractValidator<Command>
@@ -40,7 +40,7 @@ public class EditProfile
             var user = await _context.Users
                 .FirstOrDefaultAsync(x => x.UserName == _userNameAccessor.GetUsername());
 
-            user.DisplayName = request.DisplayName ?? user.DisplayName;
+            user!.DisplayName = request.DisplayName ?? user.DisplayName;
             
             var success = await _context.SaveChangesAsync() > 0;
             if (!success) return ResponseResult<Unit>.Failure("Failed to update profile");

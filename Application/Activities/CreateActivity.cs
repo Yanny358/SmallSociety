@@ -12,7 +12,7 @@ public class CreateActivity
 {
     public class Command : IRequest<ResponseResult<Unit>>
     {
-        public Activity Activity { get; set; }
+        public Activity Activity { get; set; }  = default!;
     }
 
     public class CommandValidator : AbstractValidator<Command>
@@ -41,7 +41,7 @@ public class CreateActivity
 
             var atendee = new ActivityAtendee
             {
-                AppUser = user,
+                AppUser = user!,
                 Activity = request.Activity,
                 IsHost = true
             };

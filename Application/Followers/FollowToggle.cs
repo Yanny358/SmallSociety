@@ -11,7 +11,7 @@ public class FollowToggle
 {
     public class Command : IRequest<ResponseResult<Unit>>
     {
-        public string TargetUsername { get; set; }
+        public string TargetUsername { get; set; }  = default!;
     }
     
     public class Handler : IRequestHandler<Command, ResponseResult<Unit>>
@@ -33,9 +33,9 @@ public class FollowToggle
             var target = await _context.Users
                 .FirstOrDefaultAsync(x => x.UserName == request.TargetUsername);
 
-            if (target == null) return null;
+            if (target == null) return null!;
 
-            var following = await _context.UserFollowings.FindAsync(observer.Id, target.Id);
+            var following = await _context.UserFollowings.FindAsync(observer!.Id, target.Id);
 
             if (following == null)
             {

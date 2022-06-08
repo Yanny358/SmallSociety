@@ -27,30 +27,30 @@ public class MappingProfiles : Profile
                     => opt.MapFrom(a => a.AppUser.UserName))
             .ForMember(i => i.Image, 
                 opt 
-                    => opt.MapFrom(p => p.AppUser.Photos.FirstOrDefault(x => x.IsMain)!.Url))
+                    => opt.MapFrom(p => p.AppUser.Photos!.FirstOrDefault(x => x.IsMain)!.Url))
             .ForMember(d => d.FollowersCount,
                 opt
-                    => opt.MapFrom(s => s.AppUser.Followers.Count))
+                    => opt.MapFrom(s => s.AppUser.Followers!.Count))
             .ForMember(d => d.FollowingCount,
                 opt
-                    => opt.MapFrom(s => s.AppUser.Followings.Count))
+                    => opt.MapFrom(s => s.AppUser.Followings!.Count))
             .ForMember(d => d.Following,
                 o =>
-                    o.MapFrom(s => s.AppUser.Followers.Any(x => x.Observer.UserName == currentUsername)));
+                    o.MapFrom(s => s.AppUser.Followers!.Any(x => x.Observer.UserName == currentUsername)));
 
         CreateMap<AppUser, Profiles.Profile>()
             .ForMember(i => i.Image,
                 opt
-                    => opt.MapFrom(p => p.Photos.FirstOrDefault(x => x.IsMain)!.Url))
+                    => opt.MapFrom(p => p.Photos!.FirstOrDefault(x => x.IsMain)!.Url))
             .ForMember(d => d.FollowersCount,
                 opt
-                    => opt.MapFrom(s => s.Followers.Count))
+                    => opt.MapFrom(s => s.Followers!.Count))
             .ForMember(d => d.FollowingCount,
                 opt
-                    => opt.MapFrom(s => s.Followings.Count))
+                    => opt.MapFrom(s => s.Followings!.Count))
             .ForMember(d => d.Following,
                 o =>
-                    o.MapFrom(s => s.Followers.Any(x => x.Observer.UserName == currentUsername)));
+                    o.MapFrom(s => s.Followers!.Any(x => x.Observer.UserName == currentUsername)));
         
         CreateMap<Comment, CommentDTO>()
             .ForMember(d => d.DisplayName,
@@ -61,7 +61,7 @@ public class MappingProfiles : Profile
                     => opt.MapFrom(a => a.Author.UserName))
             .ForMember(i => i.Image, 
                 opt 
-                    => opt.MapFrom(p => p.Author.Photos.FirstOrDefault(x => x.IsMain)!.Url));
+                    => opt.MapFrom(p => p.Author.Photos!.FirstOrDefault(x => x.IsMain)!.Url));
         
     }
 }

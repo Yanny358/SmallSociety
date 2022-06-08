@@ -32,12 +32,12 @@ public class UpdateAttendance
                 .ThenInclude(u => u.AppUser)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (activity == null) return null;
+            if (activity == null) return null!;
 
             var user = await _context.Users
                 .FirstOrDefaultAsync(x => x.UserName == _userNameAccessor.GetUsername());
 
-            if (user == null) return null;
+            if (user == null) return null!;
 
             var hostUsername = activity.Atendees
                 .FirstOrDefault(x => x.IsHost)?.AppUser.UserName;

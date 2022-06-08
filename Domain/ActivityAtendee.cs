@@ -2,9 +2,9 @@ namespace Domain;
 
 public class ActivityAtendee
 {
-    public string AppUserId { get; set; }
-    public AppUser AppUser { get; set; }
-    public Guid ActivityId { get; set; }
-    public Activity Activity { get; set; }
+    public string AppUserId { get; set; } = default!;
+    public AppUser AppUser { get; set; } = default!;
+    public Guid ActivityId { get; set; } = default!;
+    public Activity Activity { get; set; } = default!;
     public bool IsHost { get; set; }
 }

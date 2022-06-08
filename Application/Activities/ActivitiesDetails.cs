@@ -34,7 +34,7 @@ public class ActivitiesDetails
                 .ProjectTo<ActivityDTO>(_mapper.ConfigurationProvider,
                     new {currentUsername = _userNameAccessor.GetUsername()})
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
-            return ResponseResult<ActivityDTO>.Success(activity);
+            return ResponseResult<ActivityDTO>.Success(activity!);
         }
     }
     

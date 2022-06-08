@@ -10,7 +10,7 @@ public class SetMainPhoto
 {
     public class Command : IRequest<ResponseResult<Unit>>
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = default!;
     }
     
     public class Handler : IRequestHandler<Command, ResponseResult<Unit>>
@@ -29,12 +29,12 @@ public class SetMainPhoto
         {
             var user = await _context.Users.Include(p => p.Photos)
                 .FirstOrDefaultAsync(x => x.UserName == _userNameAccessor.GetUsername());
-            if (user == null) return null;
+            if (user == null) return null!;
 
-            var photo = user.Photos.FirstOrDefault(x => x.Id == request.Id);
-            if (photo == null) return null;
+            var photo = user.Photos!.FirstOrDefault(x => x.Id == request.Id);
+            if (photo == null) return null!;
 
-            var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+            var currentMain = user.Photos!.FirstOrDefault(x => x.IsMain);
             if (currentMain != null) currentMain.IsMain = false;
             photo.IsMain = true;
 

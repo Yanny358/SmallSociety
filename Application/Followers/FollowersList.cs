@@ -12,8 +12,8 @@ public class FollowersList
 {
     public class Query : IRequest<ResponseResult<List<Profiles.Profile>>>
     {
-        public string Predicate { get; set; }
-        public string Username { get; set; }
+        public string Predicate { get; set; } = default!;
+        public string Username { get; set; } = default!;
     }
     
     public class Handler : IRequestHandler<Query, ResponseResult<List<Profiles.Profile>>>

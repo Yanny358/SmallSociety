@@ -12,7 +12,7 @@ public class AllActivitiesList
 {
     public class Query : IRequest<ResponseResult<PagedList<ActivityDTO>>>
     {
-        public ActivityParams Params { get; set; }
+        public ActivityParams Params { get; set; }  = default!;
     }
 
     public class Handler : IRequestHandler<Query, ResponseResult<PagedList<ActivityDTO>>>
@@ -40,7 +40,7 @@ public class AllActivitiesList
             if (request.Params.IsGoing && !request.Params.IsHost)
             {
                 query = query
-                    .Where(x => x.Atendees.
+                    .Where(x => x.Atendees!.
                         Any(a => a.Username == _userNameAccessor.GetUsername()));
             }
             

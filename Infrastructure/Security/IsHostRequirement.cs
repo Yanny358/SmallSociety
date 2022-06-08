@@ -28,7 +28,7 @@ public class IsHostRequirementHandler : AuthorizationHandler<IsHostRequirement>
         if (userId == null) return Task.CompletedTask;
 
         var activityId = Guid.Parse(_httpContextAccessor.HttpContext?.Request.RouteValues
-            .SingleOrDefault(x => x.Key == "id").Value?.ToString());
+            .SingleOrDefault(x => x.Key == "id").Value?.ToString()!);
 
         var atendee = _dbContext.ActivityAtendees
             .AsNoTracking()
