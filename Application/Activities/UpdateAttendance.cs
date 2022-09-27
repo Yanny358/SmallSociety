@@ -28,7 +28,7 @@ public class UpdateAttendance
         public async Task<ResponseResult<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             var activity = await _context.Activities
-                .Include(a => a.Atendees)
+                .Include(a => a.Attendees)
                 .ThenInclude(u => u.AppUser)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 
@@ -39,30 +39,30 @@ public class UpdateAttendance
 
             if (user == null) return null!;
 
-            var hostUsername = activity.Atendees
+            var hostUsername = activity.Attendees
                 .FirstOrDefault(x => x.IsHost)?.AppUser.UserName;
 
-            var atendee = activity.Atendees
+            var attendee = activity.Attendees
                 .FirstOrDefault(x => x.AppUser.UserName == user.UserName);
 
-            if (atendee != null && hostUsername == user.UserName)
+            if (attendee != null && hostUsername == user.UserName)
             {
                 activity.IsCancelled = !activity.IsCancelled;
             }
-            if (atendee != null && hostUsername != user.UserName)
+            if (attendee != null && hostUsername != user.UserName)
             {
-                activity.Atendees.Remove(atendee);
+                activity.Attendees.Remove(attendee);
             }
 
-            if (atendee == null)
+            if (attendee == null)
             {
-                atendee = new ActivityAtendee
+                attendee = new ActivityAttendee
                 {
                     AppUser = user,
                     Activity = activity,
                     IsHost = false
                 };
-                activity.Atendees.Add(atendee);
+                activity.Attendees.Add(attendee);
             }
 
             var result = await _context.SaveChangesAsync() > 0;

@@ -21,7 +21,7 @@ public class PhotoAccessor : IPhotoAccessor
         _cloudinary = new Cloudinary(account);
     }
     
-    public async Task<PhotoUploadResult> AddPhoto(IFormFile file)
+    public async Task<PhotoUploadResult?> AddPhoto(IFormFile file)
     {
         if (file.Length > 0)
         {
@@ -49,7 +49,7 @@ public class PhotoAccessor : IPhotoAccessor
 
     }
 
-    public async  Task<string> DeletePhoto(string publicId)
+    public async  Task<string?> DeletePhoto(string publicId)
     {
         var deleteParams = new DeletionParams(publicId);
         var result = await _cloudinary.DestroyAsync(deleteParams);

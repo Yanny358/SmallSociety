@@ -12,7 +12,7 @@ public class DataContext : IdentityDbContext<AppUser>
     }
 
     public DbSet<Activity> Activities { get; set; }
-    public DbSet<ActivityAtendee> ActivityAtendees { get; set; }
+    public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<UserFollowing> UserFollowings { get; set; }
@@ -20,17 +20,17 @@ public class DataContext : IdentityDbContext<AppUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Entity<ActivityAtendee>(k => k.HasKey(a => 
+        builder.Entity<ActivityAttendee>(k => k.HasKey(a => 
             new { a.AppUserId, a.ActivityId }));
 
-        builder.Entity<ActivityAtendee>()
+        builder.Entity<ActivityAttendee>()
             .HasOne(u => u.AppUser)
             .WithMany(a => a.Activities)
             .HasForeignKey(aa => aa.AppUserId);
         
-        builder.Entity<ActivityAtendee>()
+        builder.Entity<ActivityAttendee>()
             .HasOne(u => u.Activity)
-            .WithMany(a => a.Atendees)
+            .WithMany(a => a.Attendees)
             .HasForeignKey(aa => aa.ActivityId);
 
         builder.Entity<Comment>()

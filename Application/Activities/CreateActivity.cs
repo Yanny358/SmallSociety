@@ -39,14 +39,14 @@ public class CreateActivity
             var user = await _context.Users.FirstOrDefaultAsync(
                 x => x.UserName == _userNameAccessor.GetUsername());
 
-            var atendee = new ActivityAtendee
+            var attendee = new ActivityAttendee
             {
                 AppUser = user!,
                 Activity = request.Activity,
                 IsHost = true
             };
             
-            request.Activity.Atendees.Add(atendee);
+            request.Activity.Attendees.Add(attendee);
 
             _context.Activities.Add(request.Activity);
 

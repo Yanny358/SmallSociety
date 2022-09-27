@@ -34,9 +34,9 @@ public class Seed
                     Category = "drinks",
                     City = "London",
                     Venue = "Pub",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = true
@@ -51,14 +51,14 @@ public class Seed
                     Category = "culture",
                     City = "Paris",
                     Venue = "The Louvre",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = false
@@ -73,14 +73,14 @@ public class Seed
                     Category = "music",
                     City = "London",
                     Venue = "Wembly Stadium",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[2],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = false
@@ -95,14 +95,14 @@ public class Seed
                     Category = "food",
                     City = "London",
                     Venue = "Jamies Italian",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[2],
                             IsHost = false
@@ -117,14 +117,14 @@ public class Seed
                     Category = "drinks",
                     City = "London",
                     Venue = "Pub",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = false
@@ -139,9 +139,9 @@ public class Seed
                     Category = "culture",
                     City = "London",
                     Venue = "British Museum",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = true
@@ -156,14 +156,14 @@ public class Seed
                     Category = "drinks",
                     City = "London",
                     Venue = "Punch and Judy",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = false
@@ -178,14 +178,14 @@ public class Seed
                     Category = "music",
                     City = "London",
                     Venue = "O2 Arena",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[2],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = false
@@ -200,14 +200,14 @@ public class Seed
                     Category = "travel",
                     City = "Berlin",
                     Venue = "All",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[0],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[2],
                             IsHost = false
@@ -222,14 +222,14 @@ public class Seed
                     Category = "drinks",
                     City = "London",
                     Venue = "Pub",
-                    Atendees = new List<ActivityAtendee>
+                    Attendees = new List<ActivityAttendee>
                     {
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[2],
                             IsHost = true
                         },
-                        new ActivityAtendee
+                        new ActivityAttendee
                         {
                             AppUser = users[1],
                             IsHost = false

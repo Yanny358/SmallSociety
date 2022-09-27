@@ -30,14 +30,14 @@ public class IsHostRequirementHandler : AuthorizationHandler<IsHostRequirement>
         var activityId = Guid.Parse(_httpContextAccessor.HttpContext?.Request.RouteValues
             .SingleOrDefault(x => x.Key == "id").Value?.ToString()!);
 
-        var atendee = _dbContext.ActivityAtendees
+        var attendee = _dbContext.ActivityAttendees
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.AppUserId == userId && x.ActivityId == activityId)
             .Result;
         
-        if(atendee == null) return Task.CompletedTask;
+        if(attendee == null) return Task.CompletedTask;
         
-        if(atendee.IsHost) context.Succeed(requirement);
+        if(attendee.IsHost) context.Succeed(requirement);
         
         return Task.CompletedTask;
     } 

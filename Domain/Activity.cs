@@ -10,7 +10,6 @@ public class Activity
     public string City { get; set; } = default!;
     public string Venue { get; set; } = default!;
     public bool IsCancelled { get; set; }
-    public ICollection<ActivityAtendee> Atendees { get; set; } = new List<ActivityAtendee>();
-
+    public ICollection<ActivityAttendee> Attendees { get; set; } = new List<ActivityAttendee>();
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 }

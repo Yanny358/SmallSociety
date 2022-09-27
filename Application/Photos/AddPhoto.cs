@@ -37,7 +37,7 @@ public class AddPhoto
             var photoUploadResult = await _photoAccessor.AddPhoto(request.File);
             var photo = new Photo
             {
-                Url = photoUploadResult.Url,
+                Url = photoUploadResult!.Url,
                 Id = photoUploadResult.PublicId
             };
 

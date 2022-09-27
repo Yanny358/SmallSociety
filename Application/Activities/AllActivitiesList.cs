@@ -3,7 +3,6 @@ using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities;
@@ -40,7 +39,7 @@ public class AllActivitiesList
             if (request.Params.IsGoing && !request.Params.IsHost)
             {
                 query = query
-                    .Where(x => x.Atendees!.
+                    .Where(x => x.Attendees!.
                         Any(a => a.Username == _userNameAccessor.GetUsername()));
             }
             
@@ -50,8 +49,7 @@ public class AllActivitiesList
             }
             
             return ResponseResult<PagedList<ActivityDTO>>.Success(
-                await PagedList<ActivityDTO>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize)
-                );
+                await PagedList<ActivityDTO>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
         }
     }
 }
