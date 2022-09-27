@@ -1,6 +1,6 @@
 namespace Domain;
 
-public class ActivityAtendee
+public class ActivityAttendee
 {
     public string AppUserId { get; set; } = default!;
     public AppUser AppUser { get; set; } = default!;

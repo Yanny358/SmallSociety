@@ -1,4 +1,3 @@
-
 using API;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -35,6 +34,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
@@ -43,6 +45,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
+app.MapFallbackToController("Index", "Fallback");
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);  //postgres fix
 using var scope = app.Services.CreateScope();

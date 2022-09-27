@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[AllowAnonymous]
 [ApiController]
 [Route("api/[controller]")]
 public class AccountController : ControllerBase
@@ -26,8 +27,7 @@ public class AccountController : ControllerBase
     /// Authorize: Bearer 'your-jwt-token'
     /// </summary>
     /// <param name="loginDto">Supply email and password</param>
-    /// <returns>displayname,token, username, image</returns>
-    [AllowAnonymous]
+    /// <returns>displayname,token, username image if it there is any</returns>
     [HttpPost("login")]
     [Consumes("application/json")]
     [Produces( "application/json" )]
@@ -55,7 +55,6 @@ public class AccountController : ControllerBase
     /// </summary>
     /// <param name="registerDto"></param>
     /// <returns></returns>
-    [AllowAnonymous]
     [HttpPost("register")]
     [Produces( "application/json" )]
     [Consumes("application/json")]
@@ -65,11 +64,13 @@ public class AccountController : ControllerBase
     {
         if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
         {
-            return BadRequest("Sorry this Email is already taken");
+            ModelState.AddModelError("email", "Email is already taken");
+            return ValidationProblem();
         }
         if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
         {
-            return BadRequest("Sorry this username is already taken");
+            ModelState.AddModelError("username", "Username is already taken");
+            return ValidationProblem();
         }
 
         var user = new AppUser
