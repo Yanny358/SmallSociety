@@ -35,7 +35,7 @@ public static class AppServiceExtensions
                 var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
                 // Parse connection URL to connection string for Npgsql
-                connUrl = connUrl.Replace("postgres://", string.Empty);
+                connUrl = connUrl!.Replace("postgres://", string.Empty);
                 var pgUserPass = connUrl.Split("@")[0];
                 var pgHostPortDb = connUrl.Split("@")[1];
                 var pgHostPort = pgHostPortDb.Split("/")[0];
@@ -61,6 +61,7 @@ public static class AppServiceExtensions
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
+                    .WithExposedHeaders("WWW-Authenticate", "Pagination")
                     .WithOrigins("http://localhost:3000");
             });
         });

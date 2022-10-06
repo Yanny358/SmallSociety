@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[AllowAnonymous]
 [ApiController]
 [Route("api/[controller]")]
 public class AccountController : ControllerBase
@@ -29,6 +28,7 @@ public class AccountController : ControllerBase
     /// <param name="loginDto">Supply email and password</param>
     /// <returns>displayname,token, username image if it there is any</returns>
     [HttpPost("login")]
+    [AllowAnonymous]
     [Consumes("application/json")]
     [Produces( "application/json" )]
     [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
@@ -56,6 +56,7 @@ public class AccountController : ControllerBase
     /// <param name="registerDto"></param>
     /// <returns></returns>
     [HttpPost("register")]
+    [AllowAnonymous]
     [Produces( "application/json" )]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
