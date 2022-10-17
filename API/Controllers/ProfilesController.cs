@@ -5,6 +5,12 @@ namespace API.Controllers;
 
 public class ProfilesController : BaseApiController
 {
+    [HttpGet]
+    public async Task<IActionResult> GetAllProfiles()
+    {
+        return HandleResult(await Mediator.Send(new AllProfilesList.Query()));
+    }
+
     [HttpGet("{username}")]
     public async Task<IActionResult> GetProfile(string username)
     {
